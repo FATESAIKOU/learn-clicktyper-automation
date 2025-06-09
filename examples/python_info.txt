@@ -1,0 +1,8 @@
+Python 是一種高級程式語言
+它被廣泛用於資料科學
+機器學習也經常使用 Python
+Python 有很多優秀的庫
+NumPy 是數值計算的基礎
+Pandas 用於資料分析
+Flask 和 Django 是網頁框架
+Python 的語法簡潔易懂
