@@ -27,6 +27,22 @@ def greet(name, count, polite):
     for _ in range(count):
         click.echo(f"{greeting}, {name}!")
 
+
+@cli.command()
+@click.argument('name')
+@click.argument('mom_name')
+@click.option('--count', '-c', default=1, help='重複問候的次數')
+@click.option('--polite', '-p', is_flag=True, help='使用禮貌的問候方式')
+def greet_mom(name, mom_name, count, polite):
+    """
+    問候指定的人和他的媽媽
+    """
+    greeting = "您好" if polite else "你好"
+    for _ in range(count):
+        click.echo(f"{greeting}, {name}!")
+        click.echo(f"{greeting}, {mom_name}!")
+
+
 @cli.command()
 @click.argument('text')
 @click.option('--chars', '-c', is_flag=True, help='同時顯示字元數')
