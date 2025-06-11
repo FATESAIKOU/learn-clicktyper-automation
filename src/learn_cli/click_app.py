@@ -44,6 +44,25 @@ def greet_mom(name, mom_name, count, polite):
 
 
 @cli.command()
+@click.argument('names', nargs=-1) # 模仿 mv 的 srcs
+@click.argument('title') # 模仿 mv 的 dest
+@click.option('--prefix', '-p', default='>>> ', help='問候詞前綴') # 普通 optional
+@click.option('--greeting', '-g', multiple=True, help='多種問候詞') # 陣列 optional
+def greet_all(names, prefix, title, greeting):
+    """
+    綜合測試：問候 + 多選項 + 類似 mv 介面
+    """
+    click.echo(f"人名列表: {', '.join(names)}")
+    click.echo(f"稱謂: {title}")
+    click.echo(f"prefix: {prefix}")
+    click.echo(f"問候詞: {', '.join(greeting)}")
+    click.echo("===== 問候結果 =====")
+    
+    for name in names:
+        for g in greeting:
+            click.echo(f"{prefix} {g}, {title} {name}!")
+
+@cli.command()
 @click.argument('text')
 @click.option('--chars', '-c', is_flag=True, help='同時顯示字元數')
 def count_words(text, chars):
