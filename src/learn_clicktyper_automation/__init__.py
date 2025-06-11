@@ -10,21 +10,22 @@ Learn CLI - Typer 和 Click 學習專案
 
 __version__ = "0.1.0"
 
+
 def main() -> None:
     """
     主要進入點 - 讓使用者選擇要使用哪個 CLI 框架
     """
-    import sys
     import importlib.util
+    import sys
     from pathlib import Path
-    
+
     # 動態導入 CLI 模組
     def import_module_from_path(module_name, file_path):
         spec = importlib.util.spec_from_file_location(module_name, file_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         return module
-    
+
     if len(sys.argv) < 2:
         print("學習 Typer 和 Click CLI 框架")
         print("")
@@ -38,14 +39,14 @@ def main() -> None:
         print("  learn-clicktyper-automation typer --help")
         print("  learn-clicktyper-automation click --help")
         return
-    
+
     framework = sys.argv[1]
-    
+
     # 找到 CLI 模組的路徑
     current_dir = Path(__file__).parent.parent
     typer_path = current_dir / "learn_cli" / "typer_app.py"
     click_path = current_dir / "learn_cli" / "click_app.py"
-    
+
     if framework == "typer":
         # 移除 'typer' 參數，讓 typer 處理剩餘的參數
         sys.argv = [sys.argv[0]] + sys.argv[2:]

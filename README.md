@@ -16,6 +16,7 @@
 ### 前置條件
 
 確保你已安裝 `uv`:
+
 ```bash
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -43,7 +44,7 @@ uv sync
 # 使用 Typer 版本
 learn-clicktyper-automation typer [命令] [選項]
 
-# 使用 Click 版本  
+# 使用 Click 版本
 learn-clicktyper-automation click [命令] [選項]
 ```
 
@@ -63,6 +64,7 @@ learn-clicktyper-automation click --help
 ## 🛠️ 功能範例
 
 ### 1. 問候功能
+
 ```bash
 # 基本問候
 learn-clicktyper-automation typer greet Alice
@@ -76,6 +78,7 @@ learn-clicktyper-automation click greet Alice --polite
 ```
 
 ### 2. 文字處理
+
 ```bash
 # 字數統計
 learn-clicktyper-automation typer count-words "這是一個測試文字"
@@ -85,6 +88,7 @@ learn-clicktyper-automation click count-words "測試文字" --chars
 ```
 
 ### 3. 檔案處理
+
 ```bash
 # 轉換為大寫
 learn-clicktyper-automation typer process-file input.txt --uppercase
@@ -97,6 +101,7 @@ learn-clicktyper-automation typer process-file input.txt --output output.txt --u
 ```
 
 ### 4. 計算功能
+
 ```bash
 # 基本計算
 learn-clicktyper-automation typer calc add 10 5
@@ -105,6 +110,7 @@ learn-clicktyper-automation typer calc div 15 3
 ```
 
 ### 5. 檔案搜尋替換
+
 ```bash
 # 搜尋並替換文字
 learn-clicktyper-automation typer search-replace input.txt "舊文字" "新文字"
@@ -117,6 +123,7 @@ learn-clicktyper-automation typer search-replace input.txt "查找" "替換" --o
 ```
 
 ### 6. 檔案分析報告
+
 ```bash
 # 分析目錄中的檔案
 learn-clicktyper-automation typer generate-report . --pattern "*.py"
@@ -129,6 +136,7 @@ learn-clicktyper-automation typer generate-report src --pattern "*.py" --format 
 ```
 
 ### 7. 互動式功能
+
 ```bash
 # Typer 互動式示範（包含進度條、提示輸入等）
 learn-clicktyper-automation typer interactive-demo
@@ -138,6 +146,7 @@ learn-clicktyper-automation click interactive-demo
 ```
 
 ### 8. Click 專有功能
+
 ```bash
 # 列表格式化
 learn-clicktyper-automation click list-items 項目1 項目2 項目3
@@ -195,6 +204,7 @@ learn-clicktyper-automation/
 ## 📚 學習重點
 
 ### Typer 特色
+
 - 基於 Python type hints，自動生成幫助文件
 - 語法簡潔，易於學習
 - 自動參數驗證
@@ -203,6 +213,7 @@ learn-clicktyper-automation/
 - 優雅的錯誤處理
 
 ### Click 特色
+
 - 靈活的裝飾器語法
 - 強大的參數類型系統
 - 支援複雜的命令群組
@@ -212,15 +223,15 @@ learn-clicktyper-automation/
 
 ### 主要差異對比
 
-| 特性 | Typer | Click |
-|------|-------|-------|
-| 語法風格 | Type hints | 裝飾器 |
-| 學習曲線 | 較緩 | 中等 |
-| 功能豐富度 | 現代化 | 全面 |
-| 社群支援 | 新興 | 成熟 |
-| 自動生成幫助 | 優秀 | 良好 |
-| 互動式功能 | 內建 | 需額外配置 |
-| 進度條支援 | 內建 | 內建 |
+| 特性         | Typer      | Click      |
+| ------------ | ---------- | ---------- |
+| 語法風格     | Type hints | 裝飾器     |
+| 學習曲線     | 較緩       | 中等       |
+| 功能豐富度   | 現代化     | 全面       |
+| 社群支援     | 新興       | 成熟       |
+| 自動生成幫助 | 優秀       | 良好       |
+| 互動式功能   | 內建       | 需額外配置 |
+| 進度條支援   | 內建       | 內建       |
 
 ## 🔧 開發工具
 

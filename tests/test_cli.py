@@ -4,19 +4,19 @@
 這個檔案包含針對兩個 CLI 框架的基本功能測試。
 """
 
-import pytest
 import sys
 from pathlib import Path
-from typer.testing import CliRunner as TyperCliRunner
+
 from click.testing import CliRunner as ClickCliRunner
+from typer.testing import CliRunner as TyperCliRunner
 
 # 添加 src 目錄到 Python 路徑
 current_dir = Path(__file__).parent
 src_path = current_dir.parent / "src"
 sys.path.insert(0, str(src_path))
 
-from learn_cli.typer_app import app as typer_app
-from learn_cli.click_app import cli as click_app
+from learn_cli.click_app import cli as click_app  # noqa: E402
+from learn_cli.typer_app import app as typer_app  # noqa: E402
 
 
 def test_typer_greet_basic():
@@ -70,7 +70,9 @@ def test_click_calc_add():
 def test_click_list_items_json():
     """測試 Click 項目列表 JSON 格式"""
     runner = ClickCliRunner()
-    result = runner.invoke(click_app, ["list-items", "--format", "json", "項目1", "項目2"])
+    result = runner.invoke(
+        click_app, ["list-items", "--format", "json", "項目1", "項目2"]
+    )
     assert result.exit_code == 0
     assert "項目1" in result.output
     assert "項目2" in result.output
@@ -92,8 +94,10 @@ def test_typer_generate_report():
         # 創建測試檔案
         with open("test.py", "w", encoding="utf-8") as f:
             f.write("print('hello')\nprint('world')")
-        
-        result = runner.invoke(typer_app, ["generate-report", ".", "--pattern", "*.py", "--format", "json"])
+
+        result = runner.invoke(
+            typer_app, ["generate-report", ".", "--pattern", "*.py", "--format", "json"]
+        )
         assert result.exit_code == 0
         assert "test.py" in result.stdout
 
@@ -106,7 +110,7 @@ def test_typer_search_replace():
         test_content = "Hello world\nHello Python\nGoodbye world"
         with open("test.txt", "w", encoding="utf-8") as f:
             f.write(test_content)
-        
+
         result = runner.invoke(typer_app, ["search-replace", "test.txt", "Hello", "Hi"])
         assert result.exit_code == 0
         assert "Hi world" in result.stdout
@@ -125,7 +129,10 @@ def test_click_interactive_demo():
 def test_click_random_numbers():
     """測試 Click 隨機數生成功能"""
     runner = ClickCliRunner()
-    result = runner.invoke(click_app, ["random-numbers", "--count", "3", "--min-val", "1", "--max-val", "10"])
+    result = runner.invoke(
+        click_app,
+        ["random-numbers", "--count", "3", "--min-val", "1", "--max-val", "10"],
+    )
     assert result.exit_code == 0
     assert "生成 3 個隨機數字" in result.output
     assert "統計:" in result.output
@@ -138,8 +145,10 @@ def test_click_generate_report():
         # 創建測試檔案
         with open("test.py", "w", encoding="utf-8") as f:
             f.write("print('hello')\nprint('world')")
-        
-        result = runner.invoke(click_app, ["generate-report", ".", "--pattern", "*.py", "--format", "json"])
+
+        result = runner.invoke(
+            click_app, ["generate-report", ".", "--pattern", "*.py", "--format", "json"]
+        )
         assert result.exit_code == 0
         assert "test.py" in result.output
 
@@ -152,7 +161,7 @@ def test_click_search_replace():
         test_content = "Hello world\nHello Python\nGoodbye world"
         with open("test.txt", "w", encoding="utf-8") as f:
             f.write(test_content)
-        
+
         result = runner.invoke(click_app, ["search-replace", "test.txt", "Hello", "Hi"])
         assert result.exit_code == 0
         assert "Hi world" in result.output
@@ -162,13 +171,21 @@ def test_click_search_replace():
 def test_typer_greet_all():
     """測試 Typer 綜合問候命令"""
     runner = TyperCliRunner()
-    result = runner.invoke(typer_app, [
-        "greet-all", 
-        ">>> ", 
-        "Alice", "Bob", "--title", "女士", 
-        "--greeting", "你好",
-        "-g", "您好"
-    ])
+    result = runner.invoke(
+        typer_app,
+        [
+            "greet-all",
+            ">>> ",
+            "Alice",
+            "Bob",
+            "--title",
+            "女士",
+            "--greeting",
+            "你好",
+            "-g",
+            "您好",
+        ],
+    )
     assert result.exit_code == 0
     assert "prefix: >>> " in result.stdout
     assert "人名列表: ['Alice', 'Bob']" in result.stdout
@@ -184,13 +201,21 @@ def test_typer_greet_all():
 def test_click_greet_all():
     """測試 Click 綜合問候命令"""
     runner = ClickCliRunner()
-    result = runner.invoke(click_app, [
-        "greet-all", 
-        "Alice", "Bob", "女士", 
-        "--prefix", ">>> ", 
-        "--greeting", "你好",
-        "-g", "您好"
-    ])
+    result = runner.invoke(
+        click_app,
+        [
+            "greet-all",
+            "Alice",
+            "Bob",
+            "女士",
+            "--prefix",
+            ">>> ",
+            "--greeting",
+            "你好",
+            "-g",
+            "您好",
+        ],
+    )
     assert result.exit_code == 0
     assert "prefix: >>> " in result.output
     assert "人名列表: ('Alice', 'Bob')" in result.output
