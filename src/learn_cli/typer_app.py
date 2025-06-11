@@ -6,7 +6,7 @@ Typer 是基於 type hints 的 CLI 框架，語法簡潔易懂。
 """
 
 import typer
-from typing import Optional
+from typing import List, Optional
 from pathlib import Path
 
 # 創建主要的 Typer 應用程式
@@ -24,6 +24,27 @@ def greet(
     greeting = "您好" if polite else "你好"
     for _ in range(count):
         typer.echo(f"{greeting}, {name}!")
+
+
+@app.command()
+def greet_all(
+    prefix: str = typer.Argument(">>> ", help="問候詞前綴"),
+    names: List[str] = typer.Argument(..., help="要問候的人名列表（模仿 mv 的 srcs）"),
+    title: str = typer.Option("先生/小姐", "--title", "-t", help="稱謂"), # typer 不支援 narg -1 的選項，所以用 Option
+    greeting: Optional[List[str]] = typer.Option(None, "--greeting", "-g", help="多種問候詞"),
+):
+    """
+    綜合測試：問候 + 多選項 + 類似 mv 介面
+    """
+    typer.echo(f"prefix: {prefix}")
+    typer.echo(f"人名列表: {', '.join(names)}")
+    typer.echo(f"稱謂: {title}")
+    typer.echo(f"問候詞: {greeting}")
+    typer.echo("===== 問候結果 =====")
+    for name in names:
+        for g in greeting:
+            typer.echo(f"{prefix}{g}, {title} {name}!")
+
 
 @app.command()
 def count_words(
