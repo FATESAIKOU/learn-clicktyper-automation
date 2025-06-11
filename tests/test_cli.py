@@ -157,3 +157,47 @@ def test_click_search_replace():
         assert result.exit_code == 0
         assert "Hi world" in result.output
         assert "Hi Python" in result.output
+
+
+def test_typer_greet_all():
+    """測試 Typer 綜合問候命令"""
+    runner = TyperCliRunner()
+    result = runner.invoke(typer_app, [
+        "greet-all", 
+        ">>> ", 
+        "Alice", "Bob", "--title", "女士", 
+        "--greeting", "你好",
+        "-g", "您好"
+    ])
+    assert result.exit_code == 0
+    assert "prefix: >>> " in result.stdout
+    assert "人名列表: ['Alice', 'Bob']" in result.stdout
+    assert "稱謂: 女士" in result.stdout
+    assert "問候詞: ['你好', '您好']" in result.stdout
+    assert "===== 問候結果 =====" in result.stdout
+    assert ">>> 你好, 女士 Alice!" in result.stdout
+    assert ">>> 您好, 女士 Alice!" in result.stdout
+    assert ">>> 你好, 女士 Bob!" in result.stdout
+    assert ">>> 您好, 女士 Bob!" in result.stdout
+
+
+def test_click_greet_all():
+    """測試 Click 綜合問候命令"""
+    runner = ClickCliRunner()
+    result = runner.invoke(click_app, [
+        "greet-all", 
+        "Alice", "Bob", "女士", 
+        "--prefix", ">>> ", 
+        "--greeting", "你好",
+        "-g", "您好"
+    ])
+    assert result.exit_code == 0
+    assert "prefix: >>> " in result.output
+    assert "人名列表: ('Alice', 'Bob')" in result.output
+    assert "稱謂: 女士" in result.output
+    assert "問候詞: ('你好', '您好')" in result.output
+    assert "===== 問候結果 =====" in result.output
+    assert ">>> 你好, 女士 Alice!" in result.output
+    assert ">>> 您好, 女士 Alice!" in result.output
+    assert ">>> 你好, 女士 Bob!" in result.output
+    assert ">>> 您好, 女士 Bob!" in result.output

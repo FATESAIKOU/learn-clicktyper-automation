@@ -37,7 +37,7 @@ def greet_all(
     綜合測試：問候 + 多選項 + 類似 mv 介面
     """
     typer.echo(f"prefix: {prefix}")
-    typer.echo(f"人名列表: {', '.join(names)}")
+    typer.echo(f"人名列表: {names}")
     typer.echo(f"稱謂: {title}")
     typer.echo(f"問候詞: {greeting}")
     typer.echo("===== 問候結果 =====")

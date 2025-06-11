@@ -52,15 +52,15 @@ def greet_all(names, prefix, title, greeting):
     """
     綜合測試：問候 + 多選項 + 類似 mv 介面
     """
-    click.echo(f"人名列表: {', '.join(names)}")
+    click.echo(f"人名列表: {names}")
     click.echo(f"稱謂: {title}")
     click.echo(f"prefix: {prefix}")
-    click.echo(f"問候詞: {', '.join(greeting)}")
+    click.echo(f"問候詞: {greeting}")
     click.echo("===== 問候結果 =====")
     
     for name in names:
         for g in greeting:
-            click.echo(f"{prefix} {g}, {title} {name}!")
+            click.echo(f"{prefix}{g}, {title} {name}!")
 
 @cli.command()
 @click.argument('text')
